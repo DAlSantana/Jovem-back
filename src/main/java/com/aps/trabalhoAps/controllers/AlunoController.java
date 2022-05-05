@@ -1,10 +1,8 @@
 package com.aps.trabalhoAps.controllers;
 
 import com.aps.trabalhoAps.models.Aluno;
-import com.aps.trabalhoAps.models.HistoricoEscolar;
 import com.aps.trabalhoAps.services.AlunoService;
 
-import com.aps.trabalhoAps.services.HistoricoEscolarService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,15 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/aluno")
 public class AlunoController {
   final AlunoService alunoService;
-  final HistoricoEscolarService historicoEscolarService;
-    public AlunoController(AlunoService alunoService, HistoricoEscolarService historicoEscolarService) {
+    public AlunoController(AlunoService alunoService) {
         this.alunoService = alunoService;
-        this.historicoEscolarService = historicoEscolarService;
     }
 
     @PostMapping
     public ResponseEntity<Object> salvarAluno(@RequestBody Aluno alunoDto){
-        historicoEscolarService.save(alunoDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.save(alunoDto));
     }
 

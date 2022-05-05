@@ -2,7 +2,6 @@ package com.aps.trabalhoAps.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +15,7 @@ public class Aluno implements Serializable {
 
     private String Nome;
     private String cpf;
+
 
     public UUID getMatricula() {
         return matricula;

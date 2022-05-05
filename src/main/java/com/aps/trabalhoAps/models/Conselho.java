@@ -23,6 +23,19 @@ public class Conselho implements Serializable {
 
     private String Nome;
 
+    @Column(nullable = false)
+    @OneToMany
+    @JoinColumn(name = "id")
+    private List<Ata> atas;
+
+    public List<Ata> getAtas() {
+        return atas;
+    }
+
+    public void setAtas(List<Ata> atas) {
+        this.atas = atas;
+    }
+
     public String getNome() {
         return Nome;
     }

@@ -2,7 +2,6 @@ package com.aps.trabalhoAps.services;
 
 import com.aps.trabalhoAps.models.Aluno;
 import com.aps.trabalhoAps.repositories.AlunoRepository;
-import com.aps.trabalhoAps.repositories.HistoricoEscolarRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
