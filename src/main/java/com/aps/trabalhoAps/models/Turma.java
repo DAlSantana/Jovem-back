@@ -1,6 +1,7 @@
 package com.aps.trabalhoAps.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -12,30 +13,43 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idTurma;
 
-    private Integer idAluno;
-    private Integer idProfessor;
+    @Column(nullable = false)
+    @OneToMany
+    @JoinColumn(name = "matricula")
+    private List<Aluno> alunos;
+
+    private Professor professor;
+
+    public Turma() {
+
+    }
 
     public UUID getIdTurma() {
         return idTurma;
+    }
+
+    public Turma(List<Aluno> alunos, Professor professor) {
+        this.alunos = alunos;
+        this.professor = professor;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(Aluno aluno) {
+        this.alunos.add(aluno);
     }
 
     public void setIdTurma(UUID idTurma) {
         this.idTurma = idTurma;
     }
 
-    public Integer getIdAluno() {
-        return idAluno;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public void setIdAluno(Integer idAluno) {
-        this.idAluno = idAluno;
-    }
-
-    public Integer getIdProfessor() {
-        return idProfessor;
-    }
-
-    public void setIdProfessor(Integer idProfessor) {
-        this.idProfessor = idProfessor;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 }

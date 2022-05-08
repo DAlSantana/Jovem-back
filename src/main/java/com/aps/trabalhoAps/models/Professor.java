@@ -15,9 +15,19 @@ public class Professor implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    public Professor(String nome, String cpf, Integer contrato) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.contrato = contrato;
+    }
+
     private String nome;
     private String cpf;
     private Integer contrato;
+
+    public Professor() {
+
+    }
 
     public UUID getId() {
         return id;

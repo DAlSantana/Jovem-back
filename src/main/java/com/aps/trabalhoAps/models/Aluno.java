@@ -16,6 +16,15 @@ public class Aluno implements Serializable {
     private String Nome;
     private String cpf;
 
+    public Aluno(String nome, String cpf, Integer historico) {
+        Nome = nome;
+        this.cpf = cpf;
+        this.historico = historico;
+    }
+
+    public Aluno() {
+
+    }
 
     public UUID getMatricula() {
         return matricula;
