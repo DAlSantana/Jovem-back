@@ -23,10 +23,10 @@ public class Requisicao implements Serializable {
     @Column
     private String descricao;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Secretaria secretaria;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name="ata_id")
     private List<Ata> atas;
 

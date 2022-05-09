@@ -19,7 +19,7 @@ public class Aluno implements Serializable {
     @Column
     private String cpf;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Turma turma;
 
     

@@ -24,16 +24,29 @@ public class LoginController {
 
 	@PostMapping("/{profile}")
 	public ResponseEntity<?> login(@PathVariable(value = "profile", required = true) String profile,
-			@RequestHeader(value = "id", required = true) UUID id,
+			@RequestHeader(value = "id", required = true) String id,
 			@RequestHeader(value = "password", required = true) String password) {
-		Optional<?> login = loginService.login(profile, id, password);
-		if (login.isEmpty()) {
+		try {
+			var uuid = UUID.fromString(id);
+			Optional<?> login = loginService.login(profile, uuid, password);
+			if (login.isEmpty()) {
+				Error error = new Error();
+				error.setStatus(HttpStatus.FORBIDDEN);
+				error.setMessage("ID ou senha incorretos para o perfil definido");
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+			}
+			return ResponseEntity.status(HttpStatus.OK).body(login.get());
+		}catch(IllegalArgumentException e) {
 			Error error = new Error();
-			error.setStatus(HttpStatus.FORBIDDEN);
-			error.setMessage("ID ou senha incorretos para o perfil definido");
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+			error.setStatus(HttpStatus.BAD_REQUEST);
+			error.setMessage("Por favor utilize um id válido.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+		}catch (Exception e) {
+			Error error = new Error();
+			error.setStatus(HttpStatus.BAD_REQUEST);
+			error.setMessage(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(login.get());
 	}
 
 }

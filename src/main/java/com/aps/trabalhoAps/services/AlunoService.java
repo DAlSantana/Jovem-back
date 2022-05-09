@@ -28,8 +28,8 @@ public class AlunoService {
 
     @Transactional
     public Optional<?> save(AlunoRequest alunoRequest){
-    	Optional<Turma> turma = turmaRepository.findById(alunoRequest.getTurma());
-    	if(turma.isEmpty()) {
+    	Optional<Turma> turmaOpt = turmaRepository.findById(alunoRequest.getTurma());
+    	if(turmaOpt.isEmpty()) {
     		Error error = new Error();
     		error.setStatus(HttpStatus.NOT_FOUND);
     		error.setMessage("Turma não encontrada");
@@ -38,8 +38,12 @@ public class AlunoService {
     	Aluno aluno = new Aluno();
     	aluno.setCpf(alunoRequest.getCpf());
     	aluno.setNome(alunoRequest.getNome());
-    	aluno.setTurma(turma.get());
-        return Optional.of(alunoRepository.save(aluno));
+    	Turma turma = turmaOpt.get();
+    	turma.addAluno(aluno);
+    	aluno.setTurma(turmaOpt.get());
+    	aluno = alunoRepository.save(aluno);
+    	turmaRepository.save(turma);
+        return Optional.of(aluno);
     }
 
     public List<Aluno> recuperarTodos() {

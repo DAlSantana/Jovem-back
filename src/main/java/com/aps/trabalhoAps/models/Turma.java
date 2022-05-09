@@ -3,6 +3,7 @@ package com.aps.trabalhoAps.models;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -16,15 +17,15 @@ public class Turma implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idTurma;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Professor professor;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Secretaria secretaria;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name="aluno_matricula")
-    private List<Aluno> alunos;
+    private List<Aluno> alunos = new ArrayList<>();
     
     @Column(nullable = false)
     private String nomeCurso;
@@ -63,5 +64,9 @@ public class Turma implements Serializable{
     
     public void setSecretaria(Secretaria secretaria) {
     	this.secretaria = secretaria;
+    }
+    
+    public void addAluno(Aluno aluno) {
+    	this.alunos.add(aluno);
     }
 }

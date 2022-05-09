@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,9 +23,9 @@ public class Conselho implements Serializable {
     @Column(nullable = false)
     private String senha;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name="secretaria_id")
-    private List<Secretaria> secretarias;
+    private List<Secretaria> secretarias = new ArrayList<Secretaria>();
 
     public String getNome() {
         return nome;

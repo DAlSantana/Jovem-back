@@ -54,4 +54,8 @@ public class RequisicaoService {
     public List<Requisicao> recuperarTodos() {
         return requisicaoRepository.findAll();
     }
+
+	public List<Requisicao> findBySecretaria_id(UUID id) {
+		return requisicaoRepository.findBySecretaria_id(id);
+	}
 }

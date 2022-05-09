@@ -13,14 +13,14 @@ public class Secretaria {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Conselho conselho;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name="turma_id")
     private List<Turma> turmas;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name="requisicao_id")
     private List<Requisicao> requisicoes;
     
