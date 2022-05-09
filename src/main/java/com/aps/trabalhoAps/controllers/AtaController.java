@@ -3,12 +3,16 @@ package com.aps.trabalhoAps.controllers;
 import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Ata;
 import com.aps.trabalhoAps.requests.AtaRequest;
+import com.aps.trabalhoAps.requests.SecretariaRequest;
 import com.aps.trabalhoAps.services.AtaService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController()
 @RequestMapping("/ata")
@@ -31,5 +35,10 @@ public class AtaController {
     @GetMapping
     public Page<Ata> findAll(Pageable pageable){
         return ataService.recuperarTodos(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Ata>> findByRequisicaoId(@PathVariable(value = "id") UUID id) {
+        return new ResponseEntity<List<Ata>>(ataService.findByReqId(id), HttpStatus.OK);
     }
 }

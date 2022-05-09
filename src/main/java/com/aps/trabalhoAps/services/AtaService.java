@@ -3,7 +3,6 @@ package com.aps.trabalhoAps.services;
 
 import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Ata;
-import com.aps.trabalhoAps.models.Informativo;
 import com.aps.trabalhoAps.models.Requisicao;
 import com.aps.trabalhoAps.repositories.AtaRepository;
 import com.aps.trabalhoAps.repositories.RequisicaoRepository;
@@ -16,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -45,6 +45,10 @@ public class AtaService {
 
     public Optional<Ata> findById(UUID id){
         return ataRepository.findById(id);
+    }
+
+    public List<Ata> findByReqId(UUID requisicao_id) {
+        return ataRepository.findByRequisicaoId(requisicao_id);
     }
 
     public Page<Ata> recuperarTodos(Pageable pageable) {
