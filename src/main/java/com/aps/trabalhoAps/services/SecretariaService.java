@@ -1,5 +1,6 @@
 package com.aps.trabalhoAps.services;
 
+import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Conselho;
 import com.aps.trabalhoAps.models.Secretaria;
 import com.aps.trabalhoAps.repositories.ConselhoRepository;
@@ -7,6 +8,7 @@ import com.aps.trabalhoAps.repositories.SecretariaRepository;
 import com.aps.trabalhoAps.requests.SecretariaRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -41,7 +43,11 @@ public class SecretariaService {
        return conselhoRepository.findById(id);
     }
 
-	public List<Secretaria> listarSecretarias(UUID conselhoId) {
-		return secretariaRepository.findByConselhoId(conselhoId);
+	public Optional<?> listarSecretarias(UUID conselhoId) {
+		List<Secretaria> secretarias = secretariaRepository.findByConselhoId(conselhoId);
+		if(secretarias.isEmpty()) {
+			return Optional.empty();
+		}
+		return Optional.of(secretarias);
 	}
 }

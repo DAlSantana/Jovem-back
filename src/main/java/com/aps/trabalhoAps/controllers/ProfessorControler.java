@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,7 +39,7 @@ public class ProfessorControler {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Professor>> recuperarTodosOsProfessores(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(professorService.recuperarTodos(pageable));
+    public ResponseEntity<List<Professor>> recuperarTodosOsProfessores(){
+        return ResponseEntity.status(HttpStatus.OK).body(professorService.recuperarTodos());
     }
 }

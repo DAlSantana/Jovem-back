@@ -46,13 +46,12 @@ public class AtaService {
     public Optional<Ata> findById(UUID id){
         return ataRepository.findById(id);
     }
-
     public List<Ata> findByReqId(UUID requisicao_id) {
         return ataRepository.findByRequisicaoId(requisicao_id);
     }
 
-    public Page<Ata> recuperarTodos(Pageable pageable) {
-        return ataRepository.findAll(pageable);
+    public List<Ata> recuperarTodos() {
+        return ataRepository.findAll();
     }
 
 }

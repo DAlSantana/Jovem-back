@@ -60,7 +60,7 @@ public class TurmaService {
 		return turmaRepository.findBySecretariaId(secretaria_id);
 	}
     
-    public List<Turma> recuperarTodos(Pageable pageable) {
+    public List<Turma> recuperarTodos() {
         return turmaRepository.findAll();
     }
 }

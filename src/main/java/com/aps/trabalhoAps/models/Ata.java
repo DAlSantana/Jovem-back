@@ -22,7 +22,7 @@ public class Ata {
     @Column
     private String descricao;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Requisicao requisicao;
     
     public UUID getId(){

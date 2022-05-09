@@ -5,6 +5,8 @@ import com.aps.trabalhoAps.models.Aluno;
 import com.aps.trabalhoAps.requests.AlunoRequest;
 import com.aps.trabalhoAps.services.AlunoService;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -34,7 +36,7 @@ public class AlunoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Aluno>> recuperarTodosOsAlunos(@PageableDefault(page = 0, size = 10, sort = "matricula", direction = Sort.Direction.ASC) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(alunoService.recuperarTodos(pageable));
+    public ResponseEntity<List<Aluno>> recuperarTodosOsAlunos(){
+        return ResponseEntity.status(HttpStatus.OK).body(alunoService.recuperarTodos());
     }
 }

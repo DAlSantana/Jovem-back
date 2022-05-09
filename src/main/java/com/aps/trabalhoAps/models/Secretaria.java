@@ -52,8 +52,8 @@ public class Secretaria {
     	this.conselho = conselho;
     }
     
-    public Conselho getConselho() {
-    	return this.conselho;
+    public String getConselho() {
+    	return this.conselho.getNome();
     }
     
     public String getNome() {
@@ -79,11 +79,7 @@ public class Secretaria {
     public void setTelefone(String telefone) {
     	this.telefone = telefone;
     }
-    
-    public String getSenha() {
-    	return this.senha;
-    }
-    
+
     public void setSenha(String senha) {
     	this.senha = senha;
     }

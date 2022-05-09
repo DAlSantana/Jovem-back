@@ -12,7 +12,7 @@ public class Materia {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idMateria;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idMateria", referencedColumnName = "id")
     private Professor professor;
     
