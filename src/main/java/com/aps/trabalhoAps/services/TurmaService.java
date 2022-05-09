@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -54,6 +55,10 @@ public class TurmaService {
     	turma.setSecretaria(secretaria.get());
         return Optional.of(turmaRepository.save(turma));
     }
+
+	public List<Turma> findBySecretariaId(UUID secretaria_id) {
+		return turmaRepository.findBySecretariaId(secretaria_id);
+	}
     
     public List<Turma> recuperarTodos(Pageable pageable) {
         return turmaRepository.findAll();

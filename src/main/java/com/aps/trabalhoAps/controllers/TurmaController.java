@@ -2,6 +2,7 @@ package com.aps.trabalhoAps.controllers;
 
 import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Aluno;
+import com.aps.trabalhoAps.models.Ata;
 import com.aps.trabalhoAps.models.Professor;
 import com.aps.trabalhoAps.models.Turma;
 import com.aps.trabalhoAps.requests.TurmaRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/turma")
@@ -30,6 +32,11 @@ public class TurmaController {
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(turmaOpt.get());
     	}
         return ResponseEntity.status(HttpStatus.CREATED).body(turmaOpt.get());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Turma>> findBySecretariaId(@PathVariable(value = "id") UUID id) {
+        return new ResponseEntity<List<Turma>>(turmaService.findBySecretariaId(id), HttpStatus.OK);
     }
 
     @GetMapping
