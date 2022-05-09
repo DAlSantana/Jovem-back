@@ -57,7 +57,7 @@ public class ProfessorService {
         return Optional.of(professorRepository.save(professor));
     }
 
-    public Page<Professor> recuperarTodos(Pageable pageable) {
-        return professorRepository.findAll(pageable);
+    public List<Professor> recuperarTodos() {
+        return professorRepository.findAll();
     }
 }

@@ -55,7 +55,7 @@ public class TurmaService {
         return Optional.of(turmaRepository.save(turma));
     }
     
-    public List<Turma> recuperarTodos(Pageable pageable) {
+    public List<Turma> recuperarTodos() {
         return turmaRepository.findAll();
     }
 }

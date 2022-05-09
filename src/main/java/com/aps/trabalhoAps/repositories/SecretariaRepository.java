@@ -10,4 +10,5 @@ public interface SecretariaRepository extends JpaRepository<Secretaria, UUID> {
 
 	List<Secretaria> findByConselhoId(UUID conselhoId);
 
+	Secretaria findByIdAndSenha(UUID id, String senha);
 }

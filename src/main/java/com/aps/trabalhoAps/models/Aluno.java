@@ -19,7 +19,7 @@ public class Aluno implements Serializable {
     @Column
     private String cpf;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Turma turma;
 
     
@@ -47,8 +47,8 @@ public class Aluno implements Serializable {
         this.cpf = cpf;
     }
 
-    public Turma getTurma() {
-    	return this.turma;
+    public String getTurma() {
+    	return this.turma.getNomeCurso();
     }
     
     public void setTurma(Turma turma) {

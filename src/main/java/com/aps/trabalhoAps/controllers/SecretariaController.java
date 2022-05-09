@@ -34,8 +34,15 @@ public class SecretariaController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<List<Secretaria>> listarSecretarias(@PathVariable(value = "id") UUID id){
-    	return ResponseEntity.status(HttpStatus.OK).body(secretariaService.listarSecretarias(id));
+    public ResponseEntity<?> listarSecretarias(@PathVariable(value = "id") UUID id){
+    	Optional<?> secretarias = secretariaService.listarSecretarias(id);
+    	if(secretarias.isEmpty()) {
+    		Error error = new Error();
+			error.setStatus(HttpStatus.NOT_FOUND);
+			error.setMessage("Secretaria não encontrada");
+    		return ResponseEntity.status(error.getStatus()).body(error);
+    	}
+    	return ResponseEntity.status(HttpStatus.OK).body(secretarias);
     }
     
 }

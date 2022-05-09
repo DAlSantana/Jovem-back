@@ -23,10 +23,10 @@ public class Professor implements Serializable {
     @Column
     private String cpf;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Secretaria> secretarias = new ArrayList<Secretaria>();
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="turma_id")
     private List<Turma> turmas;
 

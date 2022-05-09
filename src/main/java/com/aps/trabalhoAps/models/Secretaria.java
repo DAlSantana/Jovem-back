@@ -13,14 +13,14 @@ public class Secretaria {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Conselho conselho;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="turma_id")
     private List<Turma> turmas;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="requisicao_id")
     private List<Requisicao> requisicoes;
     
@@ -52,8 +52,8 @@ public class Secretaria {
     	this.conselho = conselho;
     }
     
-    public Conselho getConselho() {
-    	return this.conselho;
+    public String getConselho() {
+    	return this.conselho.getNome();
     }
     
     public String getNome() {
@@ -79,11 +79,7 @@ public class Secretaria {
     public void setTelefone(String telefone) {
     	this.telefone = telefone;
     }
-    
-    public String getSenha() {
-    	return this.senha;
-    }
-    
+
     public void setSenha(String senha) {
     	this.senha = senha;
     }

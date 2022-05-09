@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -41,8 +42,8 @@ public class AlunoService {
         return Optional.of(alunoRepository.save(aluno));
     }
 
-    public Page<Aluno> recuperarTodos(Pageable pageable) {
-        return alunoRepository.findAll(pageable);
+    public List<Aluno> recuperarTodos() {
+        return alunoRepository.findAll();
     }
 
 }

@@ -33,7 +33,7 @@ public class TurmaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Turma>> procurarTodosAlunos(Pageable pageable){
-      return ResponseEntity.status(HttpStatus.OK).body(turmaService.recuperarTodos(pageable));
+    public ResponseEntity<List<Turma>> procurarTodosAlunos(){
+      return ResponseEntity.status(HttpStatus.OK).body(turmaService.recuperarTodos());
     }
 }

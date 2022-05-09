@@ -5,6 +5,8 @@ import com.aps.trabalhoAps.models.Requisicao;
 import com.aps.trabalhoAps.requests.RequisicaoRequest;
 import com.aps.trabalhoAps.services.RequisicaoService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +32,7 @@ public class RequisicaoController {
 
     
     @GetMapping
-    public Page<Requisicao> findAll(Pageable pageable){
-        return requisicaoService.recuperarTodos(pageable);
+    public List<Requisicao> findAll(){
+        return requisicaoService.recuperarTodos();
     }
 }

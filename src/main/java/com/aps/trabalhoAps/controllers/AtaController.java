@@ -4,6 +4,9 @@ import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Ata;
 import com.aps.trabalhoAps.requests.AtaRequest;
 import com.aps.trabalhoAps.services.AtaService;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -29,7 +32,7 @@ public class AtaController {
     }
 
     @GetMapping
-    public Page<Ata> findAll(Pageable pageable){
-        return ataService.recuperarTodos(pageable);
+    public List<Ata> findAll(){
+        return ataService.recuperarTodos();
     }
 }

@@ -22,7 +22,7 @@ public class Conselho implements Serializable {
     @Column(nullable = false)
     private String senha;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="secretaria_id")
     private List<Secretaria> secretarias;
 
@@ -36,10 +36,6 @@ public class Conselho implements Serializable {
 
     public UUID getId() {
         return id;
-    }
-    
-    public String getSenha() {
-    	return this.senha;
     }
     
     public void setSenha(String senha) {

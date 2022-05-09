@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,8 +49,8 @@ public class AtaService {
         return ataRepository.findById(id);
     }
 
-    public Page<Ata> recuperarTodos(Pageable pageable) {
-        return ataRepository.findAll(pageable);
+    public List<Ata> recuperarTodos() {
+        return ataRepository.findAll();
     }
 
 }
