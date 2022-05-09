@@ -12,20 +12,17 @@ public class Aluno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID matricula;
-
-    private String Nome;
+    
+    @Column
+    private String nome;
+    
+    @Column
     private String cpf;
+    
+    @ManyToOne
+    private Turma turma;
 
-    public Aluno(String nome, String cpf, Integer historico) {
-        Nome = nome;
-        this.cpf = cpf;
-        this.historico = historico;
-    }
-
-    public Aluno() {
-
-    }
-
+    
     public UUID getMatricula() {
         return matricula;
     }
@@ -35,11 +32,11 @@ public class Aluno implements Serializable {
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -50,13 +47,11 @@ public class Aluno implements Serializable {
         this.cpf = cpf;
     }
 
-    public Integer getHistorico() {
-        return historico;
+    public Turma getTurma() {
+    	return this.turma;
     }
-
-    public void setHistorico(Integer historico) {
-        this.historico = historico;
+    
+    public void setTurma(Turma turma) {
+    	this.turma = turma;
     }
-
-    private Integer historico;
 }

@@ -3,7 +3,9 @@ package com.aps.trabalhoAps.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,20 +16,20 @@ public class Professor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
-    public Professor(String nome, String cpf, Integer contrato) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.contrato = contrato;
-    }
-
+    
+    @Column
     private String nome;
+    
+    @Column
     private String cpf;
-    private Integer contrato;
+    
+    @ManyToMany
+    private List<Secretaria> secretarias = new ArrayList<Secretaria>();
+    
+    @OneToMany
+    @JoinColumn(name="turma_id")
+    private List<Turma> turmas;
 
-    public Professor() {
-
-    }
 
     public UUID getId() {
         return id;
@@ -54,11 +56,11 @@ public class Professor implements Serializable {
         this.cpf = cpf;
     }
 
-    public Integer getContrato() {
-        return contrato;
+    public List<Secretaria> getSecretarias(){
+    	return this.secretarias;
     }
-
-    public void setContrato(Integer contrato) {
-        this.contrato = contrato;
+    
+    public void setSecretarias(List<Secretaria> secretarias) {
+    	this.secretarias = secretarias;
     }
 }

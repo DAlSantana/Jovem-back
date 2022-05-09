@@ -1,55 +1,66 @@
 package com.aps.trabalhoAps.models;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "Turma")
-public class Turma {
+public class Turma implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idTurma;
 
-    @Column(nullable = false)
-    @OneToMany
-    @JoinColumn(name = "matricula")
-    private List<Aluno> alunos;
-
+    @ManyToOne
     private Professor professor;
-
-    public Turma() {
-
-    }
+    
+    @ManyToOne
+    private Secretaria secretaria;
+    
+    @OneToMany
+    @JoinColumn(name="aluno_matricula")
+    private List<Aluno> alunos;
+    
+    @Column(nullable = false)
+    private String nomeCurso;
 
     public UUID getIdTurma() {
         return idTurma;
     }
-
-    public Turma(List<Aluno> alunos, Professor professor) {
-        this.alunos = alunos;
-        this.professor = professor;
+    
+    public String getNomeCurso() {
+    	return this.nomeCurso;
     }
-
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(Aluno aluno) {
-        this.alunos.add(aluno);
-    }
-
-    public void setIdTurma(UUID idTurma) {
-        this.idTurma = idTurma;
+    
+    public void setNomeCurso(String nomeCurso) {
+    	this.nomeCurso = nomeCurso;
     }
 
     public Professor getProfessor() {
-        return professor;
+    	return this.professor;
     }
-
+    
     public void setProfessor(Professor professor) {
-        this.professor = professor;
+    	this.professor = professor;
+    }
+    
+    public List<Aluno> getAlunos(){
+    	return this.alunos;
+    }
+    
+    public void setAlunos(List<Aluno> alunos) {
+    	this.alunos = alunos;
+    }
+    
+    public Secretaria getSecretaria() {
+    	return this.secretaria;
+    }
+    
+    public void setSecretaria(Secretaria secretaria) {
+    	this.secretaria = secretaria;
     }
 }

@@ -1,6 +1,8 @@
 package com.aps.trabalhoAps.controllers;
 
+import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Aluno;
+import com.aps.trabalhoAps.requests.AlunoRequest;
 import com.aps.trabalhoAps.services.AlunoService;
 
 import org.springframework.data.domain.Page;
@@ -23,8 +25,12 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> salvarAluno(@RequestBody Aluno alunoDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.save(alunoDto));
+    public ResponseEntity<Object> salvarAluno(@RequestBody AlunoRequest alunoDto){
+    	var aluno = alunoService.save(alunoDto);
+    	if(aluno.get() instanceof Error) {
+    		return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(aluno.get());
+    	}
+        return ResponseEntity.status(HttpStatus.CREATED).body(aluno.get());
     }
 
     @GetMapping

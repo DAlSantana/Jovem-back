@@ -1,8 +1,12 @@
 package com.aps.trabalhoAps.controllers;
 
+import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Aluno;
 import com.aps.trabalhoAps.models.Professor;
+import com.aps.trabalhoAps.requests.ProfessorRequest;
 import com.aps.trabalhoAps.services.ProfessorService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,19 +18,23 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/professor")
 public class ProfessorControler {
-    final ProfessorService professorService;
-
-    public ProfessorControler(ProfessorService professorService) {
-        this.professorService = professorService;
-    }
+	
+	@Autowired
+    private ProfessorService professorService;
 
     @PostMapping
-    public ResponseEntity<Object> salvarProfessor(@RequestBody Professor professor){
-        return ResponseEntity.status(HttpStatus.CREATED).body(professorService.save(professor));
+    public ResponseEntity<Object> salvarProfessor(@RequestBody ProfessorRequest professorRequest){
+    	Optional<?> professorOpt = professorService.save(professorRequest);
+    	if(professorOpt.get() instanceof Error) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(professorOpt.get());
+    	}
+		return ResponseEntity.status(HttpStatus.CREATED).body(professorOpt.get());
+        
     }
 
     @GetMapping

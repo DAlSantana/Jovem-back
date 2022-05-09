@@ -11,9 +11,12 @@ public class Materia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idMateria;
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idMateria", referencedColumnName = "id")
     private Professor professor;
+    
+    @Column
     private String nomeMateria;
 
     public UUID getIdMateria() {

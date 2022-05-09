@@ -1,6 +1,8 @@
 package com.aps.trabalhoAps.controllers;
 
+import com.aps.trabalhoAps.domain.Error;
 import com.aps.trabalhoAps.models.Ata;
+import com.aps.trabalhoAps.requests.AtaRequest;
 import com.aps.trabalhoAps.services.AtaService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,8 +20,12 @@ public class AtaController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> salvarAta(@RequestBody Ata ata){
-        return ResponseEntity.status(HttpStatus.CREATED).body(ataService.save(ata));
+    public ResponseEntity<Object> salvarAta(@RequestBody AtaRequest ataRequest){
+    	var ata = ataService.save(ataRequest);
+    	if(ata.get() instanceof Error) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ata.get());
+    	}
+        return ResponseEntity.status(HttpStatus.CREATED).body(ata.get());
     }
 
     @GetMapping

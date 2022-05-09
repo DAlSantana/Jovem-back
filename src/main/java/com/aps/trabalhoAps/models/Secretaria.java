@@ -12,9 +12,33 @@ public class Secretaria {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
-    @OneToMany(targetEntity=Turma.class, mappedBy="idTurma", fetch=FetchType.EAGER)
+    
+    @ManyToOne
+    private Conselho conselho;
+    
+    @OneToMany
+    @JoinColumn(name="turma_id")
     private List<Turma> turmas;
+    
+    @OneToMany
+    @JoinColumn(name="requisicao_id")
+    private List<Requisicao> requisicoes;
+    
+    @Column(nullable = false, unique = true)
+    private String nome;
+    
+    @Column(nullable = false)
+    private String endereco;
+    
+    @Column(nullable = false)
+    private String telefone;
+    
+    @Column(nullable = false)
+    private String senha;
+    
+    
+    @ManyToMany
+    private List<Professor> professores;
 
     public UUID getId() {
         return id;
@@ -23,12 +47,44 @@ public class Secretaria {
     public void setId(UUID id) {
         this.id = id;
     }
-
-    public List<Turma> getTurmas() {
-        return turmas;
+    
+    public void setConselho(Conselho conselho) {
+    	this.conselho = conselho;
+    }
+    
+    public Conselho getConselho() {
+    	return this.conselho;
+    }
+    
+    public String getNome() {
+    	return this.nome;
+    }
+    
+    public void setNome(String nome) {
+    	this.nome = nome;
+    }
+    
+    public String getEndereco() {
+    	return this.endereco;
+    }
+    
+    public void setEndereco(String endereco) {
+    	this.endereco = endereco;
+    }
+    
+    public String getTelefone() {
+    	return this.telefone;
     }
 
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
+    public void setTelefone(String telefone) {
+    	this.telefone = telefone;
+    }
+    
+    public String getSenha() {
+    	return this.senha;
+    }
+    
+    public void setSenha(String senha) {
+    	this.senha = senha;
     }
 }

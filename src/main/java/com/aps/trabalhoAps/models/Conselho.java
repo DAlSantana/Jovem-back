@@ -16,48 +16,34 @@ public class Conselho implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false, unique = true)
+    private String nome;
+    
     @Column(nullable = false)
+    private String senha;
+    
     @OneToMany
-    @JoinColumn(name = "id")
+    @JoinColumn(name="secretaria_id")
     private List<Secretaria> secretarias;
 
-    private String Nome;
-
-    @Column(nullable = false)
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<Ata> atas;
-
-    public List<Ata> getAtas() {
-        return atas;
-    }
-
-    public void setAtas(List<Ata> atas) {
-        this.atas = atas;
-    }
-
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public UUID getId() {
         return id;
     }
-
-    public void setId(UUID id) {
-        this.id = id;
+    
+    public String getSenha() {
+    	return this.senha;
     }
-
-    public List<Secretaria> getSecretarias() {
-        return secretarias;
-    }
-
-    public void setSecretarias(List<Secretaria> secretarias) {
-        this.secretarias = secretarias;
+    
+    public void setSenha(String senha) {
+    	this.senha = senha;
     }
 
 }
